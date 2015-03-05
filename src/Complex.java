@@ -3,4 +3,9 @@
  */
 public class Complex{
 
+    public double modulus() {
+        double a=getRe();
+        double b=getIm();
+        return Math.sqrt(a*a+b*b);
+    }
 }
