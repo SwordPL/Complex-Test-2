@@ -27,4 +27,12 @@ public class ComplexTest {
         assertEquals(5, new Complex(4, -3).modulus(), 0.0000001);
     }
 
+    @Test
+    public void mulTest() throws Exception {
+        Complex c = new Complex(2, 4);
+        Assert.assertEquals(new Complex(2, 4), c.mul(1, 0));
+        Assert.assertEquals(new Complex(-4, 2), c.mul(0, 1));
+        Assert.assertEquals(new Complex(-2, 6), c.mul(1, 1));
+        Assert.assertEquals(new Complex(-4, -28), c.mul(-6, -2));
+    }
 }
