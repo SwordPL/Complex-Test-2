@@ -1,30 +1,51 @@
 public class Complex{
-    private double Re;
-    private double Im;
+    private final double re;
+    private final double im;
 
     public Complex (double Re, double Im) {
-        this.Re = Re;
-        this.Im = Im;
+        this.re = Re;
+        this.im = Im;
     }
 
     public Double getRe() {
-        return this.Re;
+        return this.re;
     }
 
     public Double getIm() {
-        return this.Im;
+        return this.im;
     }
 
+    public Complex plus(double u, double v) {
+        return new Complex(getRe() + u, getIm() + v);
+    }
+
+    public Complex plus(Complex complex) {
+        return this.plus(complex.getRe(), complex.getIm());
+    }
+
+    public Complex minus(double u, double v) {
+        return this.plus(-u, -v);
+    }
+
+    public Complex minus(Complex complex) {
+        return this.plus(-complex.getRe(), -complex.getIm());
+    }
+
+    public Complex mul(double c, double d) {
+        double newRe = (getRe() * c) - (getIm() * d);
+        double newIm = (getRe() * d) + (getIm() * c);
+        return new Complex(newRe, newIm);
+    }
 
     public Complex divide(double addedRe, double addedIm) {
         if (addedRe == 0 && addedIm ==0) {
             throw new IllegalArgumentException();
         } else {
-            double newRe = 0;
-            double newIm = 0;
+            double newRe;
+            double newIm;
 
-            newRe = (Re * addedRe + Im * addedIm) / (Math.sqrt(addedRe) + Math.sqrt(addedIm));
-            newIm = (Im * addedRe - Re * addedIm) / (Math.sqrt(addedRe) + Math.sqrt(addedIm));
+            newRe = (getRe() * addedRe + getIm() * addedIm) / (addedRe * addedRe + addedIm * addedIm);
+            newIm = (getIm() * addedRe - getRe() * addedIm) / (addedRe * addedRe + addedIm * addedIm);
 
             return new Complex(newRe, newIm);
         }
@@ -34,6 +55,9 @@ public class Complex{
         return divide(other.getRe(), other.getIm());
     }
 
+    public double modulus() {
+        return Math.sqrt(getRe() * getRe() + getIm() * getIm());
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -42,32 +66,18 @@ public class Complex{
 
         Complex complex = (Complex) o;
 
-        if (Double.compare(complex.Im, Im) != 0) return false;
-        if (Double.compare(complex.Re, Re) != 0) return false;
+        return Double.compare(complex.im, im) == 0 && Double.compare(complex.re, re) == 0;
 
-        return true;
     }
 
     @Override
     public int hashCode() {
         int result;
         long temp;
-        temp = Double.doubleToLongBits(Re);
+        temp = Double.doubleToLongBits(re);
         result = (int) (temp ^ (temp >>> 32));
-        temp = Double.doubleToLongBits(Im);
+        temp = Double.doubleToLongBits(im);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
-    }
-    
-    public double modulus() {
-        double a=getRe();
-        double b=getIm();
-        return Math.sqrt(a*a+b*b);
-    }
-    
-    public Complex mul (double c, double d) {
-        this.Re=(getRe()*c)-(getIm()*d);
-        this.Im=(getRe()*d)+(getIm()*c);
-        return this;
     }
 }
