@@ -23,8 +23,8 @@ public class ComplexTest {
     }
     @Test
     public void modulusTest() throws Exception {
-        assertEquals(5, new Complex(4, 3).modulus(), 5);
-        assertEquals(5, new Complex(4, -3).modulus(), 5);
+        assertEquals(5, new Complex(4, 3).modulus(), 0.0000001);
+        assertEquals(5, new Complex(4, -3).modulus(), 0.0000001);
     }
 
 }
