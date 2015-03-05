@@ -1,8 +1,6 @@
-
+/**
+ * Created by Hubert on 2015-03-05.
+ */
 public class Complex{
-    public double argument(){
-        double tan = (getIm()/(getRe());
-        double arg = Math.atan(tan));
-        return arg;
-    }
+
 }
