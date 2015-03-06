@@ -1,4 +1,5 @@
-public class Complex{
+
+public class Complex {
     private final double re;
     private final double im;
 
@@ -59,6 +60,24 @@ public class Complex{
         return Math.sqrt(getRe() * getRe() + getIm() * getIm());
     }
 
+    public double argument() throws Exception {
+        double arg;
+        if (getRe() == 0 && getIm() == 0) throw new IllegalArgumentException();
+        if (getRe() == 0) {
+            if (getIm() > 0) {
+                arg = Math.PI / 2;
+                return arg;
+            } else {
+                arg = -1 * Math.PI / 2;
+                return arg;
+            }
+        }
+
+        double tan = (getIm() / (getRe()));
+        arg = Math.atan(tan);
+        return arg;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

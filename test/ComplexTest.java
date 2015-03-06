@@ -20,11 +20,6 @@ public class ComplexTest {
         assertEquals(new Complex(11.5, 11.5), c.minus(new Complex(-1.5, -1.5)));
 
     }
-    @Test
-    public void modulusTest() throws Exception {
-        assertEquals(5, new Complex(4, 3).modulus(), 0.0000001);
-        assertEquals(5, new Complex(4, -3).modulus(), 0.0000001);
-    }
 
     @Test
     public void mulTest() throws Exception {
@@ -61,5 +56,25 @@ public class ComplexTest {
     public void DivisionByComplexZeroAsComplexTest() {
         Complex c = new Complex(10, 10);
         c.divide(new Complex(0, 0));
+    }
+
+    @Test
+    public void modulusTest() throws Exception {
+        assertEquals(5, new Complex(4, 3).modulus(), 0.0000001);
+        assertEquals(5, new Complex(4, -3).modulus(), 0.0000001);
+    }
+
+    @Test
+    public void argumentTest() throws Exception {
+        Complex firstNumber = new Complex(11, 11);
+        Complex rightAngle = new Complex(0, 2);
+        assertEquals(Math.PI / 4, firstNumber.argument(), 0.000001);
+        assertEquals(Math.PI / 2, rightAngle.argument(), 0.000001);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void argumentExceptionTest() throws Exception {
+        Complex firstNumber = new Complex(0, 0);
+        firstNumber.argument();
     }
 }
